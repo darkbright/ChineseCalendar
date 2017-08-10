@@ -21,6 +21,17 @@ public class SampleChineseCalendar {
 		System.out.println(sdf.format(gcal.getTime()));
 		cal.convert();
 		System.out.println(cal.CYear + "년 " + cal.CMonth + "월 " + cal.CDay + "일 " + cal.CHour + "시");
+		
+		LunarConjunction lunar = new LunarConjunction();
+		Calendar cal_lunar;
+		cal_lunar = lunar.getPreviousConjunction(cal.GYear, cal.GMonth, cal.GDay);
+		System.out.println("이번달 합삭시(초하루) : " + sdf.format(cal_lunar.getTime()));
+		
+		cal_lunar = lunar.getNextConjunction(cal.GYear, cal.GMonth, cal.GDay);
+		System.out.println("다음달 합삭시(초하루) : " + sdf.format(cal_lunar.getTime()));
+
+		cal_lunar = lunar.getFullMoon(cal.GYear, cal.GMonth, cal.GDay);
+		System.out.println("이번달 망시간(보름날) : " + sdf.format(cal_lunar.getTime()));
 	}
 
 }
