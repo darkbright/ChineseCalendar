@@ -47,7 +47,7 @@ public class LunarConjunction extends GregorianCalendar {
 	public Calendar getDateByMin(long tmin, int year, int month, int day, int hour, int minute) {
 		Calendar cal = new GregorianCalendar(year, month-1, day, hour, minute);
 		
-		long millis = cal.getTimeInMillis() + tmin;
+		long millis = cal.getTimeInMillis() - (tmin * 60 * 1000);
 		cal.setTimeInMillis(millis);
 		
 		return cal;
@@ -245,11 +245,13 @@ public class LunarConjunction extends GregorianCalendar {
 	}
 	
 	// y1,m1,d1일부터 y2,m2,d2까지의 일수 계산
-	public static int disp2days(int year1, int month1, int day1, int year2, int month2, int day2) {
+	public static long disp2days(int year1, int month1, int day1, int year2, int month2, int day2) {
 		Calendar date1 = new GregorianCalendar(year1, month1 - 1, day1);
 		Calendar date2 = new GregorianCalendar(year2, month2 - 1, day2);
 		
-	    return (int) (date2.getTimeInMillis() - date1.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+		long millis = date1.getTimeInMillis() - date2.getTimeInMillis(); 
+		
+	    return millis / (24 * 60 * 60 * 1000);
 	}
 
 }
